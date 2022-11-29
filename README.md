@@ -12,3 +12,4 @@
 
 1. [NestJS 배우기](./markdown/Chapter1.md)
 2. [TypeORM으로 데이터베이스 연동하기](./markdown/Chapter2.md)
+3. [TypeORM으로 관계형 데이터베이스 연동하기](./markdown/Chapter3.md)

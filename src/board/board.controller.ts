@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { Board } from './board.entity';
 import { BoardService } from './board.service';
 
@@ -8,6 +8,12 @@ export class BoardController {
 
   @Get()
   getAll(): Promise<Board[]> {
-    return this.boardService.findAll();
+    return this.boardService.getAll();
+  }
+
+  @Get(':uid')
+  getOne(@Param('uid') uid: number): Promise<Board> {
+    console.log(uid);
+    return this.boardService.getOne(uid);
   }
 }

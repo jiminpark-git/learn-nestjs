@@ -1,13 +1,20 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Comment } from 'src/comment/comment.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'board' })
 export class Board {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('increment')
   uid: number;
 
-  @Column({ length: 20 })
+  @Column({ type: 'varchar', length: 20 })
   title: string;
 
-  @Column({ length: 100 })
+  @Column({ type: 'varchar', length: 100 })
   content: string;
+
+  @OneToMany(() => Comment, (comment) => comment.board, {
+    cascade: true,
+    eager: true,
+  })
+  comments: Comment[];
 }
