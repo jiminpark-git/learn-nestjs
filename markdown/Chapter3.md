@@ -174,7 +174,7 @@ export class BoardController {
 export class AppModule {}
 ```
 
-`ConfigModule.forRoot()` 메소드로 .env 환경 변수 파일 주입
+`ConfigModule.forRoot()` 메소드로 .env 환경 변수 파일 주입<br />
 `TypeOrmModule.forRoot()` 메소드로 DataSource 설정
 
 #### 5.3. main.ts
@@ -182,11 +182,13 @@ export class AppModule {}
 ```ts
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  new ValidationPipe({
-    whitelist: true, // Decorator가 존재하지 않는 프로퍼티를 허용하지 않음
-    forbidNonWhitelisted: true, // 허용하지 않은 프로퍼티를 사용한 리퀘스트를 차단
-    transform: true, // 유저가 보낸 값의 타입을 자동 변환
-  });
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // Decorator가 존재하지 않는 프로퍼티를 허용하지 않음
+      forbidNonWhitelisted: true, // 허용하지 않은 프로퍼티를 사용한 리퀘스트를 차단
+      transform: true, // 유저가 보낸 값의 타입을 자동 변환
+    }),
+  );
   await app.listen(3000);
 }
 bootstrap();
