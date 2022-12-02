@@ -260,6 +260,7 @@ export class AuthController {
     throw new MethodNotAllowedException();
   }
 
+  @UseGuards(JwtGuard)
   @Post('refresh-token')
   async refreshToken(@Body('refreshToken') refreshToken: string) {
     return this.authService.refreshToken(refreshToken);
@@ -268,7 +269,7 @@ export class AuthController {
 ```
 
 - `GET auth/login` : 로그인 후 header에 Authorization 설정
-- `POST auth/logout` : @UseGuard() 어노테이션으로 JWT 인증 된 사용자만 입장 가능
+- `POST auth/logout` : JWT 인증 된 사용자만 입장 가능
 - `POST auth/refresh-token` : Refresh token
 
 ### 7. [JWT] Strategy and Guard

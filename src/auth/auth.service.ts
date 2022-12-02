@@ -5,7 +5,8 @@ import { LoginDTO } from './login.dto';
 import { compare } from 'bcrypt';
 import { User } from 'src/user/user.entity';
 import { ConfigService } from '@nestjs/config';
-import { JwtPayload } from './jwtPayload.interface';
+import { JwtPayload } from './jwt-payload.interface';
+import { RoleType } from 'src/user/user-role.entity';
 
 @Injectable()
 export class AuthService {
@@ -31,7 +32,12 @@ export class AuthService {
   }
 
   async signToken(user: User) {
-    const jwtPayload: JwtPayload = { uid: user.uid, email: user.email };
+    const roles: RoleType[] = user.userRoles.map((userRole) => userRole.type);
+    const jwtPayload: JwtPayload = {
+      uid: user.uid,
+      email: user.email,
+      roles: roles,
+    };
     const accessToken = await this.signAccessToken(jwtPayload);
     const refreshToken = await this.signRefreshToken(jwtPayload);
     return { accessToken, refreshToken };

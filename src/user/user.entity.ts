@@ -1,5 +1,6 @@
 import { IsEmail } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { UserRole } from './user-role.entity';
 
 @Entity({ name: 'user' })
 export class User {
@@ -12,4 +13,10 @@ export class User {
 
   @Column({ type: 'varchar', length: 100 })
   password: string;
+
+  @OneToMany(() => UserRole, (userRoles) => userRoles.user, {
+    cascade: true,
+    eager: true,
+  })
+  userRoles: UserRole[];
 }
