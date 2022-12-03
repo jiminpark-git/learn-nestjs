@@ -189,7 +189,7 @@ export class AppModule {}
 $ nest start --watch
 ```
 
-#### 6.1. GET http://localhost:3000/board
+#### 6.1. GET /board
 
 ```json
 [

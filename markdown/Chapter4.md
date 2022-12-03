@@ -34,7 +34,7 @@ create table user (
     uid      varchar(36)  not null primary key,
     email    varchar(30)  not null,
     password varchar(100) not null,
-    constraint user_pk unique (email)
+    constraint email_uq unique (email)
 );
 ```
 
@@ -130,7 +130,7 @@ export class UserController {
 
 ### 4. [User] Test
 
-#### 4.1. POST http://localhost:3000/user/register
+#### 4.1. POST /user/register
 
 **body**
 
@@ -308,7 +308,7 @@ export class JwtGuard extends AuthGuard('jwt') {}
 
 ### 8. [Auth, JWT] Test
 
-#### 8.1. POST http://localhost:3000/auth/logout
+#### 8.1. POST /auth/logout
 
 **response**
 
@@ -321,7 +321,7 @@ export class JwtGuard extends AuthGuard('jwt') {}
 
 로그인 하지 않은 상태에서 접근하여 `401 Error`
 
-#### 8.2. POST http://localhost:3000/auth/login
+#### 8.2. POST /auth/login
 
 **body**
 
@@ -343,7 +343,7 @@ export class JwtGuard extends AuthGuard('jwt') {}
 
 로그인 후 accessToken, refreshToken 반환
 
-#### 8.3. POST http://localhost:3000/auth/refresh-token
+#### 8.3. POST /auth/refresh-token
 
 **body**
 
@@ -364,7 +364,7 @@ export class JwtGuard extends AuthGuard('jwt') {}
 
 refershToken으로 accessToken 갱신 후 accessToken, refreshToken 반환
 
-#### 8.4. POST http://localhost:3000/auth/logout
+#### 8.4. POST /auth/logout
 
 **header**
 

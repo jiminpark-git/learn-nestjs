@@ -16,6 +16,8 @@ import { RolesGuard } from './roles.guard';
 import { Roles } from './roles.decorator';
 import { RoleType } from 'src/user/user-role.entity';
 
+const ONE_DAY = 24 * 60 * 60 * 1000;
+
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -24,14 +26,18 @@ export class AuthController {
   async login(@Body() loginDTO: LoginDTO, @Res() response: Response) {
     const token = await this.authService.login(loginDTO);
     response.setHeader('Authorization', `Bearer ${token.accessToken}`);
-    return response.json(token);
+    response.cookie('jwt', token.accessToken, {
+      httpOnly: true,
+      maxAge: ONE_DAY,
+    });
+    return response.send({ success: true });
   }
 
   @UseGuards(JwtGuard)
   @Post('logout')
-  async test(@Req() request: Request) {
-    console.log(request.user);
-    throw new MethodNotAllowedException();
+  async test(@Req() request: Request, @Res() response: Response) {
+    response.cookie('jwt', { maxAge: 0 });
+    return response.send({ success: true });
   }
 
   @UseGuards(JwtGuard)

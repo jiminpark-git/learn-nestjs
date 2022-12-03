@@ -7,7 +7,6 @@
 #### 1.1. user_role 테이블 생성
 
 ```sql
-
 create table user_role (
     uid      int auto_increment primary key,
     type     varchar(10) null,
@@ -198,7 +197,7 @@ export class AuthController {
 
 ### 5. Test
 
-#### 5.1. POST http://localhost:3000/auth/only-admin
+#### 5.1. POST /auth/only-admin
 
 **response**
 
@@ -212,7 +211,7 @@ export class AuthController {
 
 로그인하지 않은 상태 또는 ADMIN 권한이 없는 계정의 토큰을 사용하여 접근한 결과
 
-#### 5.2. POST http://localhost:3000/auth/login
+#### 5.2. POST /auth/login
 
 **response**
 

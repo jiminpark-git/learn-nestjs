@@ -202,7 +202,7 @@ bootstrap();
 $ nest start --watch
 ```
 
-#### 6.1. GET http://localhost:3000/board
+#### 6.1. GET /board
 
 ```json
 [
@@ -226,7 +226,7 @@ $ nest start --watch
 
 [1.2]에서 입력한 데이터가 정상적으로 JSON 형태로 반환되었다. :)
 
-#### 6.2. GET http://localhost:3000/board/1
+#### 6.2. GET /board/1
 
 ```json
 {
@@ -239,7 +239,7 @@ $ nest start --watch
 
 [1.2]에서 입력한 데이터가 정상적으로 JSON 형태로 반환되었다. :)
 
-#### 6.3. GET http://localhost:3000/board/2
+#### 6.3. GET /board/2
 
 ```json
 {
